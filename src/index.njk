@@ -24,7 +24,7 @@ title: Home
   {% for image in project.data.images %}
 
     <img
-      src="{{ image }}"
+      src="{{ image | url }}"
       alt="{{ project.data.title }}"
       class="{% if loop.first %}active{% endif %}"
     >
