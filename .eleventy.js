@@ -6,13 +6,13 @@ module.exports = function(eleventyConfig) {
     return api.getFilteredByTag("projects");
   });
 
-  return {
-    dir: {
-      input: "src",
-      includes: "_includes",
-      output: "_site"
-    }, pathPrefix: "/portfolio/"
-  };
+return {
+  dir: {
+    input: "src",
+    includes: "_includes",
+    output: "_site"
+  }
+};
 
 };
 
