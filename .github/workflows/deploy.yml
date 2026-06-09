@@ -3,7 +3,7 @@ name: Deploy Eleventy
 on:
   push:
     branches:
-      - main
+      - portfolio
 
 permissions:
   contents: read
