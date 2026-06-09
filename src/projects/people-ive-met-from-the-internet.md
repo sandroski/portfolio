@@ -4,6 +4,7 @@ layout: layouts/project.njk
 thumbnail: /assets/images/pimfti-cover.jpg
 tags: projects
 featured: true
+featuredOrder: 5
 year: 2019
 type: Book Design
 label: Book
