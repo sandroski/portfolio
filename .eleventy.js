@@ -11,7 +11,7 @@ module.exports = function(eleventyConfig) {
       input: "src",
       includes: "_includes",
       output: "_site"
-    }
+    }, pathPrefix: "/portfolio/"
   };
 
 };
