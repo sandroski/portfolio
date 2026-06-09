@@ -1,0 +1,69 @@
+---
+layout: layouts/base.njk
+title: Work
+permalink: /work/
+
+---
+
+
+
+
+<section class="project-list content">
+
+
+<div class="list-header">
+  <div class="list-project">Project</div><div class="list-type">Type</div><div class="list-category">Category</div><div class="list-year">Year</div></div>
+
+
+{% for project in collections.projects %}
+
+<div
+  class="project" data-slug="{{ project.fileSlug }}"  data-category="{{ project.data.category | lower }}"
+>
+
+  <a
+    href="{{ project.url }}"
+    class="project-link"
+  >
+
+    <div class="project-row">
+
+      <p class="list-title">
+        {{ project.data.title }}
+      </p>
+
+      <div class="list-preview">
+        <img src="{{ project.data.thumbnail }}" alt="">
+      </div>
+
+      <p>{{ project.data.type }}</p>
+
+      <p class="project-cat">
+        {{ project.data.category }}
+      </p>
+
+      <p class="project-year">
+        {{ project.data.year }}
+      </p>
+
+    </div>
+
+  </a>
+
+  <div class="project-expand"></div>
+
+</div>
+
+{% endfor %}
+
+
+</section>
+
+  <div class="filters">
+
+  <button data-filter="all" class="active">All</button>
+  <button data-filter="art">Art</button>
+  <button data-filter="web">Web</button>
+  <button data-filter="print">Print</button>
+
+</div>

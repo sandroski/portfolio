@@ -1,0 +1,62 @@
+---
+layout: layouts/base.njk
+title: Home
+---
+
+<!-- FEATURED HORIZONTAL -->
+<section class="gallery">
+
+  <ul class="cards">
+
+
+
+    {% for project in collections.projects %}
+      {% if project.data.featured %}
+
+     <li class="card"
+  data-category="{{ project.data.category | lower }}"
+  data-title="{{ project.data.title }}"
+  data-description="{{ project.data.description }}">
+  
+
+       <div class="card-media">
+
+  {% for image in project.data.images %}
+
+    <img
+      src="{{ image }}"
+      alt="{{ project.data.title }}"
+      class="{% if loop.first %}active{% endif %}"
+    >
+
+  {% endfor %}
+
+  <div class="card-meta">
+  <div class="flex">
+  <p>{{ project.data.title }}</p>
+  <p>{{ project.data.label }}</p>
+  </div>
+  <div class="desc">
+  <p>{{ project.data.description }}</p>
+  <p> {{ project.data.content | safe }}</p>
+</div>
+
+
+
+</div>
+
+</div>
+
+
+
+
+
+
+      </li>
+
+      {% endif %}
+    {% endfor %}
+
+  </ul>
+
+</section>

@@ -1,0 +1,47 @@
+---
+layout: layouts/base.njk
+---
+
+
+
+
+
+  <div class="project-page">
+         
+      <div class="project-description">
+        {{ content | safe }}
+
+    </div>
+
+     <div class="project-images {% if loop.first %}active{% endif %}">
+
+  {% for media in images %}
+
+    {% if media.endsWith('.mp4') %}
+
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+      >
+        <source src="{{ media }}" type="video/mp4">
+      </video>
+
+    {% else %}
+
+      <img src="{{ media }}" alt="">
+
+    {% endif %}
+
+  {% endfor %}
+
+</div>
+
+        </div>
+
+
+
+
+
+
