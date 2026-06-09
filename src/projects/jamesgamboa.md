@@ -6,7 +6,7 @@ tags: projects
 featured: false
 year: 2018
 type: Website
-category: Digital
+category: Web
 description: 
 images:
   - /assets/images/james-gamboa-home.jpg

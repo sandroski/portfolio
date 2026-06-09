@@ -6,7 +6,7 @@ tags: projects
 featured: false
 year: 2018
 type: Website
-category: Digital
+category: Web
 description: Issue 2
 images:
   - /assets/images/yes-femmes-issue-2_home-1536x1063.jpg

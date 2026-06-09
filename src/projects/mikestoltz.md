@@ -6,7 +6,7 @@ tags: projects
 featured: false
 year: 2022
 type: Website
-category: Digital
+category: Web
 description: 
 images:
   - /assets/images/mike-stoltz-mbp-1.mp4

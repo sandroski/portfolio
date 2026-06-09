@@ -6,7 +6,7 @@ tags: projects
 featured: false
 year: 2018
 type: Web & Email Design
-category: Digital
+category: Web
 description: Issue 2
 images:
   - /assets/images/dermalogica_home-1.jpg
