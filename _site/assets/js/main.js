@@ -137,6 +137,24 @@ console.log("TOTAL", totalWidth);
     { passive: true }
   );
 
+  let touchX = 0;
+
+window.addEventListener("touchstart", (e) => {
+  touchX = e.touches[0].clientX;
+}, { passive: true });
+
+window.addEventListener("touchmove", (e) => {
+
+  if (window.featuredProjectOpen) return;
+
+  const currentX = e.touches[0].clientX;
+
+  target += (touchX - currentX);
+
+  touchX = currentX;
+
+}, { passive: true });
+
   // -------------------------
   // SNAP
   // -------------------------
