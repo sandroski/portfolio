@@ -5,6 +5,12 @@ thumbnail: /assets/images/offering-tile-hp.png
 tags: projects
 featured: true
 featuredOrder: 3
+home:
+  x: 900
+  y: 600
+mobile:
+  x: 210
+  y: 345
 year: 2021
 type: Installation
 category: Art

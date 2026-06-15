@@ -1,5 +1,21 @@
 window.addEventListener("load", () => {
 
+
+
+
+
+
+  // =========================================================
+  // GALLERY INIT
+  // =========================================================
+
+  const items =
+    Array.from(document.querySelectorAll(".cards li"));
+
+  if (items.length) {
+    initGallery(items);
+  }
+
   // =========================================================
   // PROJECT ROWS INIT
   // =========================================================
@@ -12,6 +28,242 @@ window.addEventListener("load", () => {
   }
 
 });
+
+
+// =========================================================
+// GALLERY
+// =========================================================
+
+function initGallery(items) {
+
+    const GAP =
+   window.innerWidth < 768
+    ? 40
+    : 100;  
+
+    const ease = 0.14;
+
+  let widths = [];
+  let positions = [];
+  let totalWidth = 0;
+
+  let progress = 0;
+  let target = 0;
+
+  window.featuredProjectOpen = false;
+
+  // -------------------------
+  // MEASURE
+  // -------------------------
+
+  function measure() {
+
+    widths =
+      items.map(el => el.getBoundingClientRect().width);
+
+    positions = [];
+    totalWidth = 0;
+
+    for (let i = 0; i < items.length; i++) {
+
+      positions[i] = totalWidth;
+
+      totalWidth += widths[i] + GAP;
+
+    }
+
+  }
+
+  measure();
+
+console.log("WIDTHS", widths);
+console.log("TOTAL", totalWidth);
+
+  window.addEventListener("resize", measure);
+
+  // -------------------------
+  // RENDER
+  // -------------------------
+
+  function render() {
+
+    progress += (target - progress) * ease;
+
+    let x = progress % totalWidth;
+
+    if (x > 0) x -= totalWidth;
+
+    const buffer = window.innerWidth * 0.5;
+
+    const leftEdge = -buffer;
+    const rightEdge = window.innerWidth + buffer;
+
+    for (let i = 0; i < items.length; i++) {
+
+      let xPos = positions[i] + x;
+
+      while (xPos < leftEdge) {
+        xPos += totalWidth;
+      }
+
+      while (xPos > rightEdge) {
+        xPos -= totalWidth;
+      }
+
+      items[i].style.transform =
+        `translate3d(${xPos}px, -50%, 0)`;
+
+    }
+
+    requestAnimationFrame(render);
+
+  }
+
+  render();
+
+  // -------------------------
+  // SCROLL
+  // -------------------------
+
+  window.addEventListener(
+    "wheel",
+    (e) => {
+
+      if (window.featuredProjectOpen) return;
+
+      target += e.deltaY + e.deltaX;
+
+      clearTimeout(window.snapTimeout);
+
+      window.snapTimeout =
+        setTimeout(snapToNearest, 120);
+
+    },
+    { passive: true }
+  );
+
+  let touchX = 0;
+
+window.addEventListener("touchstart", (e) => {
+  touchX = e.touches[0].clientX;
+}, { passive: true });
+
+window.addEventListener("touchmove", (e) => {
+
+  if (window.featuredProjectOpen) return;
+
+  const currentX = e.touches[0].clientX;
+
+  target += (touchX - currentX);
+
+  touchX = currentX;
+
+}, { passive: true });
+
+  // -------------------------
+  // SNAP
+  // -------------------------
+
+  function snapToNearest() {
+
+    let closest = null;
+    let closestDistance = Infinity;
+
+    items.forEach((el) => {
+
+      const rect = el.getBoundingClientRect();
+
+      const center =
+        rect.left + rect.width / 2;
+
+      const distance =
+        Math.abs(center - window.innerWidth / 2);
+
+      if (distance < closestDistance) {
+
+        closestDistance = distance;
+        closest = el;
+
+      }
+
+    });
+
+    if (!closest) return;
+
+    const rect = closest.getBoundingClientRect();
+
+    const delta =
+      rect.left +
+      rect.width / 2 -
+      window.innerWidth / 2;
+
+    target = progress + delta * 0.35;
+
+  }
+
+
+
+
+  //=========
+  // HOME
+  //=======
+
+  let activeCard = null;
+
+  document.addEventListener("click", (e) => {
+
+  const card = e.target.closest(".card");
+
+  if (!card) return;
+
+  // activate new card
+
+  if (activeCard !== card) {
+
+    document
+      .querySelectorAll(".card")
+      .forEach(el => el.classList.remove("active"));
+
+    card.classList.add("active");
+
+    activeCard = card;
+
+    return;
+  }
+
+  // already active
+
+  cycleCard(card);
+
+});
+
+  function cycleCard(card) {
+
+  const images =
+    [...card.querySelectorAll(".card-media img")];
+
+  if (images.length <= 1) return;
+
+  let current =
+    images.findIndex(img =>
+      img.classList.contains("active")
+    );
+
+  images[current]
+    .classList.remove("active");
+
+  current++;
+
+  if (current >= images.length) {
+    current = 0;
+  }
+
+  images[current]
+    .classList.add("active");
+}
+
+}
+
 
 
 
@@ -413,337 +665,5 @@ filterButtons.forEach(button => {
   });
 
 });
-
-/*----------------------------
-HOME / WORLD / CAMERA / NODES
-------------------------------*/
-
-
-let moved = false;
-let activeNode = null;
-
-let previousCamera = null;
-
-const nodes = document.querySelectorAll(".project-node");
-
-const isMobile =
-  window.innerWidth < 768;
-
-nodes.forEach(node => {
-
-  const x = Number(
-    isMobile
-      ? node.dataset.mobileX
-      : node.dataset.x
-  );
-
-  const y = Number(
-    isMobile
-      ? node.dataset.mobileY
-      : node.dataset.y
-  );
-
-  node.style.left = `${x}px`;
-  node.style.top = `${y}px`;
-
-});
-
-nodes.forEach(node => {
-
-  node.addEventListener("click", focusNode);
-
-});
-
-function focusNode(e) {
-
-  e.preventDefault();
-  world.classList.add("world-focused");
-
-  const node = e.currentTarget;
-
-  if (activeNode === node) {
-
-  cycleProject(node);
-
-
-  return;
-
-
-
-}
-
-previousCamera = {
-
-  x: cameraX,
-  y: cameraY
-
-};
-
-
-
-  document
-    .querySelectorAll(".project-node")
-    .forEach(n => n.classList.remove("active"));
-
-  node.classList.add("active");
-
-  activeNode = node;
-
-  const meta =
-  document.querySelector(".project-meta");
-
-  meta.querySelector(".meta-title").textContent =
-  node.dataset.title || "";
-
-  meta.querySelector(".meta-year").textContent =
-  node.dataset.year || "";
-
-  meta.querySelector(".meta-label").textContent =
-  node.dataset.label || "";
-
-  meta.querySelector(".meta-description").textContent =
-  node.dataset.description || "";
-
-
-
-  const totalImages =
-  node.querySelectorAll(
-    ".project-gallery img"
-  ).length;
-
-meta.querySelector(".meta-count").textContent =
-  `1 / ${totalImages}`;
-
-  meta.classList.add("visible");
-
-
-
-  const rect = node.getBoundingClientRect();
-
-  const nodeCenterX =
-    rect.left + rect.width / 2;
-
-  const nodeCenterY =
-    rect.top + rect.height / 2;
-
-  const viewportCenterX =
-    window.innerWidth / 2;
-
-  const viewportCenterY =
-    window.innerHeight / 2;
-
-  targetX += viewportCenterX - nodeCenterX;
-  targetY += viewportCenterY - nodeCenterY;
-
-  document
-    .querySelector(".focus-close")
-    .classList.add("visible");
-
-}
-
-const closeButton =
-  document.querySelector(".focus-close");
-
-closeButton.addEventListener("click", () => {
-
-  if (!activeNode) return;
-
-  world.classList.remove("world-focused");
-
-  activeNode.classList.remove("active");
-
-  activeNode = null;
-
-  closeButton.classList.remove("visible");
-
-  document
-  .querySelector(".project-meta")
-  .classList.remove("visible");
-
-  setTimeout(() => {
-
-  targetX = previousCamera.x;
-  targetY = previousCamera.y;
-
-}, 250);
-
-});
-
-
-
-
-
-const world = document.querySelector("#world");
-
-let cameraX = -200;
-let cameraY = -100;
-
-let targetX = cameraX;
-let targetY = cameraY;
-
-
-
-if (window.innerWidth < 768) {
-
-  cameraX =  -100;
-  cameraY = -100;
-
-  targetX = cameraX;
-  targetY = cameraY;
-
-}
-
-
-function renderWorld() {
-
-  if (!dragging) {
-
-    targetX += velocityX;
-    targetY += velocityY;
-
-    velocityX *= 0.90;
-    velocityY *= 0.90;
-
-  }
-
-  cameraX += (targetX - cameraX) * 0.08;
-  cameraY += (targetY - cameraY) * 0.08;
-
-  world.style.transform =
-    `translate3d(${cameraX}px, ${cameraY}px, 0)`;
-
-  requestAnimationFrame(renderWorld);
-
-}
-
-
-
-let dragging = false;
-
-let startX = 0;
-let startY = 0;
-
-let velocityX = 0;
-let velocityY = 0;
-
-renderWorld();
-
-
-const viewport = document.querySelector("#viewport");
-
-viewport.addEventListener("mousedown", (e) => {
-
-
-  dragging = true;
-  //moved = false;
-
-
-  startX = e.clientX;
-  startY = e.clientY;
-
-});
-
-
-window.addEventListener("mousemove", (e) => {
-
-  if (!dragging) return;
-
-  const dx = e.clientX - startX;
-  const dy = e.clientY - startY;
-
-  targetX += dx;
-  targetY += dy;
-
-  velocityX = dx;
-  velocityY = dy;
-
-  startX = e.clientX;
-  startY = e.clientY;
-
-  if (
-  Math.abs(dx) > 5 ||
-  Math.abs(dy) > 5
-) {
-  moved = true;
-}
-
-});
-
-window.addEventListener("mouseup", () => {
-
-  dragging = false;
-
-});
-
-
-
-viewport.addEventListener("touchstart", (e) => {
-
-  dragging = true;
-
-  startX = e.touches[0].clientX;
-  startY = e.touches[0].clientY;
-
-});
-
-window.addEventListener("touchmove", (e) => {
-
-  if (!dragging) return;
-
-  const x = e.touches[0].clientX;
-  const y = e.touches[0].clientY;
-
-  const dx = x - startX;
-  const dy = y - startY;
-
-  targetX += dx;
-  targetY += dy;
-
-  velocityX = dx;
-  velocityY = dy;
-
-  startX = x;
-  startY = y;
-
-}, { passive: true });
-
-window.addEventListener("touchend", () => {
-
-  dragging = false;
-
-});
-
-function cycleProject(node) {
-
-  const images =
-    [...node.querySelectorAll("img")];
-
-  if (images.length <= 1) return;
-
-  let current =
-    images.findIndex(img =>
-      img.classList.contains("active")
-    );
-
-  images[current]
-    .classList.remove("active");
-
-  current++;
-
-  if (current >= images.length) {
-    current = 0;
-  }
-
-  images[current]
-    .classList.add("active");
-
-document
-    .querySelector(".meta-count")
-    .textContent =
-      `${current + 1} / ${images.length}`;
-
-
-}
-
 
 

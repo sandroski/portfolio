@@ -5,6 +5,12 @@ thumbnail: /assets/images/ryman_interior-2.jpg
 tags: projects
 featured: true
 featuredOrder: 4
+home:
+  x: 200
+  y: 800
+mobile:
+  x: 400
+  y: 420
 year: 2022
 type: Book Design
 label: Book

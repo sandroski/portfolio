@@ -6,6 +6,12 @@ tags: projects
 featured: true
 featuredOrder: 5
 year: 2019
+home:
+  x: 1200
+  y: 200
+mobile:
+  x: 400
+  y: 900
 type: Book Design
 label: Book
 category: Print

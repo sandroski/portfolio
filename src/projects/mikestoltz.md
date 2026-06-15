@@ -1,9 +1,12 @@
 ---
 title: Mike Stoltz
 layout: layouts/project.njk
-thumbnail: /assets/images/glorious_1-scaled.jpg
+thumbnail: /assets/images/mike-stoltz-home-feature-phone.jpg
 tags: projects
-featured: false
+featured: true
+home:
+  x: 1200
+  y: 600
 year: 2022
 type: Website
 category: Web

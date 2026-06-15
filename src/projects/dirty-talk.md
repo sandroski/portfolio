@@ -6,6 +6,12 @@ tags: projects
 featured: true
 featuredOrder: 5
 year: 2021
+home:
+  x: 200
+  y: 700
+mobile:
+  x: 300
+  y: 650
 type: Sculpture
 category: Art
 fulltitle: 

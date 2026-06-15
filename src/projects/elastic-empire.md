@@ -5,6 +5,12 @@ thumbnail: /assets/images/elastic-empire-stacked-768x512.jpg
 tags: projects
 featured: true
 featuredOrder: 2
+home:
+  x: 1300
+  y: 500
+mobile:
+  x: 100
+  y: 500
 year: 2023
 type: Book Design
 label: Book

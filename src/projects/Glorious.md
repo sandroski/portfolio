@@ -5,6 +5,12 @@ thumbnail: /assets/images/glorious_1-scaled.jpg
 tags: projects
 featured: true
 featuredOrder: 1
+home:
+  x: 275
+  y: 220
+mobile:
+  x: 100
+  y: 200
 year: 2021
 type: Sculpture
 category: Art

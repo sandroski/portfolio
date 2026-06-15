@@ -1,10 +1,16 @@
 ---
 title: Yes Femmes
 layout: layouts/project.njk
-thumbnail: /assets/images/glorious_1-scaled.jpg
+thumbnail: /assets/images/Cursor-export.png
 tags: projects
-featured: false
+featured: true
 year: 2018
+home:
+  x: 500
+  y: 700
+mobile:
+  x: 0
+  y: 800
 type: Website
 category: Web
 description: Issue 2

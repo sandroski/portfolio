@@ -3,60 +3,78 @@ layout: layouts/base.njk
 title: Home
 ---
 
-<!-- FEATURED HORIZONTAL -->
-<section class="gallery">
-
-  <ul class="cards">
 
 
 
-    {% for project in collections.projects %}
-      {% if project.data.featured %}
 
-     <li class="card"
-  data-category="{{ project.data.category | lower }}"
+
+
+<section class="world-view active">
+
+  <div id="viewport">
+
+    <div id="world">
+
+      {% for project in collections.projects %}
+            {% if project.data.featured %}
+
+
+      <a
+  class="project-node"
+  href="{{ project.url }}"
+  data-x="{{ project.data.home.x | default(0) }}"
+  data-y="{{ project.data.home.y | default(0) }}"
+  data-mobile-x="{{ project.data.mobile.x | default(project.data.home.x) }}"
+  data-mobile-y="{{ project.data.mobile.y | default(project.data.home.y) }}"
+
   data-title="{{ project.data.title }}"
+  data-year="{{ project.data.year }}"
+  data-label="{{ project.data.label }}"
   data-description="{{ project.data.description }}">
-  
-
-       <div class="card-media">
-
-  {% for image in project.data.images %}
-
-    <img
-      src="{{ image | url }}"
-      alt="{{ project.data.title }}"
-      class="{% if loop.first %}active{% endif %}"
-    >
-
-  {% endfor %}
-
-  <div class="card-meta">
-  <div class="flex">
-  <p>{{ project.data.title }}</p>
-  <p>{{ project.data.label }}</p>
-  </div>
-  <div class="desc">
-  <p>{{ project.data.description }}</p>
-  <p> {{ project.data.content | safe }}</p>
-</div>
 
 
 
-</div>
+  <div class="project-gallery">
 
-</div>
+    {% for image in project.data.images %}
 
+      <img
+        src="{{ image | url }}"
+        alt="{{ project.data.title }}"
+        class="{% if loop.first %}active{% endif %}"
+      >
 
-
-
-
-
-      </li>
-
-      {% endif %}
     {% endfor %}
 
-  </ul>
+  </div>
+
+</a>
+              {% endif %}
+
+      {% endfor %}
+
+    </div>
+
+  </div>
 
 </section>
+
+<div class="project-meta">
+  <button class="focus-close">
+  X
+</button>
+
+  <p class="meta-title"></p>
+
+  <div class="meta-year"></div>
+  <div class="meta-label"></div>
+
+  <div class="meta-description">
+  <p></p>
+</div>
+
+  <div class="meta-count"></div>
+
+</div>
+
+
