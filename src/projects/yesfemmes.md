@@ -7,7 +7,7 @@ featured: true
 year: 2018
 home:
   x: 500
-  y: 700
+  y: 1200
 mobile:
   x: 0
   y: 800

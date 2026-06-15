@@ -6,8 +6,8 @@ tags: projects
 featured: true
 featuredOrder: 3
 home:
-  x: 900
-  y: 600
+  x: 825
+  y: 525
 mobile:
   x: 210
   y: 345

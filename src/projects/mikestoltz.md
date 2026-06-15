@@ -3,7 +3,7 @@ title: Mike Stoltz
 layout: layouts/project.njk
 thumbnail: /assets/images/mike-stoltz-home-feature-phone.jpg
 tags: projects
-featured: true
+featured: false
 home:
   x: 1200
   y: 600

@@ -142,6 +142,13 @@ header .container {
   cursor: pointer;
 }
 
+body.work .nav-work,
+body.about .nav-about {
+  text-decoration: underline;
+  text-decoration-color: #2a2a2a;
+
+}
+
 
 
 
@@ -208,9 +215,11 @@ HOME CANVAS / DRAG PROJECTS
   width: 100%;
   height: 100%;
   background: transparent;
+  cursor: zoom-in;
+
 }
 
-.project-gallery img {
+.project-gallery img, .project-gallery video {
 
   position: absolute;
   inset: 0;
@@ -228,14 +237,18 @@ HOME CANVAS / DRAG PROJECTS
 
 }
 
-.project-gallery img.active {
+.project-gallery img.active, .project-gallery video.active {
   opacity: 1;
+
 }
+
+/*
 
 .project-node.active img.active {
   transform: scale(2);
 }
 
+*/
 
 .project-gallery {
   position: relative;
@@ -265,8 +278,8 @@ HOME CANVAS / DRAG PROJECTS
 
   position: fixed;
   width: 100%;
-  left: 1em;
-  top: 75px;
+  left: 0;
+  bottom: 2em;
 
   z-index: 1000;
 
@@ -276,6 +289,8 @@ HOME CANVAS / DRAG PROJECTS
 
   transition: opacity .3s ease,
   transform .3s ease;
+  padding: 1em;
+  font-size: .9em;
 
 }
 
@@ -288,6 +303,14 @@ HOME CANVAS / DRAG PROJECTS
   transform: translateY(10px);
 }
 
+.meta-description {
+  margin-bottom: 1em;
+}
+
+.meta-count {
+  font-size: .8em;
+}
+
 
 .world-focused .project-node {
   filter: blur(12px);
@@ -298,6 +321,10 @@ HOME CANVAS / DRAG PROJECTS
   filter: blur(0);
   opacity: 1;
   width: 60vw;
+}
+
+.world-focused .project-node.active .project-gallery {
+  cursor: e-resize;
 }
 
 .focus-close {
@@ -342,7 +369,7 @@ PROJECT LIST PAGE - INDEX
     display: grid;
     width: 100%;
     align-items: center;
-    grid-template-columns: 4fr 3fr 0fr 0fr;
+    grid-template-columns: 4fr 3fr 2fr 1fr;
 }
 
 
@@ -526,7 +553,7 @@ PROJECT LIST VIEW
   letter-spacing:.05em;
 
   border-bottom:1px solid #ddd;
-  grid-template-columns: 4fr 3fr 0fr 0fr;
+  grid-template-columns: 4fr 3fr 2fr 1fr;
   padding: 1em;
   
   
@@ -972,6 +999,12 @@ ABOUT CLOSE BUTTON
   width: 25vw;
 }
 
+.project-meta {
+  width: 30%;
+  left: 2em;
+  padding: 0;
+}
+
 
  .project-cat, .project-year, .list-type, .list-year {
   display: block;
@@ -988,6 +1021,11 @@ ABOUT CLOSE BUTTON
     gap: 1em;
     gap: 2em;
     grid-template-columns: 33vw 1fr;
+
+}
+
+.project-list .project-description {
+  padding: 1em;
 
 }
 

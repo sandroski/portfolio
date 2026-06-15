@@ -28,7 +28,6 @@ title: Home
   data-mobile-y="{{ project.data.mobile.y | default(project.data.home.y) }}"
 
   data-title="{{ project.data.title }}"
-  data-year="{{ project.data.year }}"
   data-label="{{ project.data.label }}"
   data-description="{{ project.data.description }}">
 
@@ -36,15 +35,31 @@ title: Home
 
   <div class="project-gallery">
 
-    {% for image in project.data.images %}
+{% for media in project.data.images %}
 
-      <img
-        src="{{ image | url }}"
-        alt="{{ project.data.title }}"
-        class="{% if loop.first %}active{% endif %}"
-      >
+  {% if ".mp4" in media %}
 
-    {% endfor %}
+    <video
+      class="{% if loop.first %}active{% endif %}"
+      muted
+      loop
+      playsinline
+      preload="metadata"
+    >
+      <source src="{{ media | url }}" type="video/mp4">
+    </video>
+
+  {% else %}
+
+    <img
+      src="{{ media | url }}"
+      alt="{{ project.data.title }}"
+      class="{% if loop.first %}active{% endif %}"
+    >
+
+  {% endif %}
+
+{% endfor %}
 
   </div>
 
@@ -65,15 +80,13 @@ title: Home
 </button>
 
   <p class="meta-title"></p>
-
-  <div class="meta-year"></div>
-  <div class="meta-label"></div>
+  <p class="meta-label"></p>
 
   <div class="meta-description">
   <p></p>
 </div>
+    <div class="meta-count"></div>
 
-  <div class="meta-count"></div>
 
 </div>
 

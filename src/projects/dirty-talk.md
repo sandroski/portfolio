@@ -7,7 +7,7 @@ featured: true
 featuredOrder: 5
 year: 2021
 home:
-  x: 200
+  x: -100
   y: 700
 mobile:
   x: 300

@@ -448,6 +448,24 @@ nodes.forEach(node => {
 
 });
 
+gsap.set(".project-node", {
+  opacity: 0,
+  scale: 0.9,
+  y: 30
+});
+
+gsap.to(".project-node", {
+  opacity: 1,
+  scale: 1,
+  y: 0,
+  duration: 1,
+  ease: "power2.out",
+  stagger: {
+    each: 0.1,
+    from: "random"
+  }
+});
+
 nodes.forEach(node => {
 
   node.addEventListener("click", focusNode);
@@ -481,6 +499,8 @@ previousCamera = {
 
 
 
+
+
   document
     .querySelectorAll(".project-node")
     .forEach(n => n.classList.remove("active"));
@@ -493,13 +513,12 @@ previousCamera = {
   document.querySelector(".project-meta");
 
   meta.querySelector(".meta-title").textContent =
-  node.dataset.title || "";
+  "Title:" + node.dataset.title || "";
 
-  meta.querySelector(".meta-year").textContent =
-  node.dataset.year || "";
+
 
   meta.querySelector(".meta-label").textContent =
-  node.dataset.label || "";
+  "Type: " + node.dataset.label || "";
 
   meta.querySelector(".meta-description").textContent =
   node.dataset.description || "";
@@ -715,33 +734,42 @@ window.addEventListener("touchend", () => {
 
 function cycleProject(node) {
 
-  const images =
-    [...node.querySelectorAll("img")];
+  const media =
+    [...node.querySelectorAll("img, video")];
 
-  if (images.length <= 1) return;
+  if (media.length <= 1) return;
 
   let current =
-    images.findIndex(img =>
-      img.classList.contains("active")
+    media.findIndex(el =>
+      el.classList.contains("active")
     );
 
-  images[current]
+  const previous = current;
+
+  media[previous]
     .classList.remove("active");
+
+  if (media[previous].tagName === "VIDEO") {
+    media[previous].pause();
+  }
 
   current++;
 
-  if (current >= images.length) {
+  if (current >= media.length) {
     current = 0;
   }
 
-  images[current]
+  media[current]
     .classList.add("active");
 
-document
+  if (media[current].tagName === "VIDEO") {
+    media[current].play();
+  }
+
+  document
     .querySelector(".meta-count")
     .textContent =
-      `${current + 1} / ${images.length}`;
-
+      `${current + 1} / ${media.length}`;
 
 }
 

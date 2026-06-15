@@ -6,7 +6,7 @@ tags: projects
 featured: true
 featuredOrder: 4
 home:
-  x: 200
+  x: 500
   y: 800
 mobile:
   x: 400
