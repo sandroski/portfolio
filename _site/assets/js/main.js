@@ -422,7 +422,12 @@ HOME / WORLD / CAMERA / NODES
 let moved = false;
 let activeNode = null;
 
+let swipeStartX = 0;
+let swipeStartY = 0;
+
 let previousCamera = null;
+
+
 
 const nodes = document.querySelectorAll(".project-node");
 
@@ -496,6 +501,7 @@ previousCamera = {
   y: cameraY
 
 };
+
 
 
 
@@ -698,6 +704,8 @@ window.addEventListener("mouseup", () => {
 
 viewport.addEventListener("touchstart", (e) => {
 
+  if (activeNode) return;
+
   dragging = true;
 
   startX = e.touches[0].clientX;
@@ -705,9 +713,22 @@ viewport.addEventListener("touchstart", (e) => {
 
 });
 
+window.addEventListener("touchstart", (e) => {
+
+  if (!activeNode) return;
+
+  swipeStartX = e.touches[0].clientX;
+  swipeStartY = e.touches[0].clientY;
+
+}, { passive: true });
+
+
+
 window.addEventListener("touchmove", (e) => {
 
   if (!dragging) return;
+
+  if (activeNode) return;
 
   const x = e.touches[0].clientX;
   const y = e.touches[0].clientY;
@@ -726,9 +747,36 @@ window.addEventListener("touchmove", (e) => {
 
 }, { passive: true });
 
-window.addEventListener("touchend", () => {
+window.addEventListener("touchend", (e) => {
 
   dragging = false;
+
+  if (!activeNode) return;
+
+
+
+  const endX =
+    e.changedTouches[0].clientX;
+
+  const endY =
+    e.changedTouches[0].clientY;
+
+  const dx = endX - swipeStartX;
+  const dy = endY - swipeStartY;
+
+  if (Math.abs(dx) < 50) return;
+
+  if (Math.abs(dx) < Math.abs(dy)) return;
+
+if (dx < 0) {
+
+  cycleProject(activeNode);
+
+} else {
+
+  cycleProjectReverse(activeNode);
+
+}
 
 });
 
@@ -773,5 +821,42 @@ function cycleProject(node) {
 
 }
 
+function cycleProjectReverse(node) {
 
+  const media =
+    [...node.querySelectorAll("img, video")];
+
+  if (media.length <= 1) return;
+
+  let current =
+    media.findIndex(el =>
+      el.classList.contains("active")
+    );
+
+  media[current]
+    .classList.remove("active");
+
+  if (media[current].tagName === "VIDEO") {
+    media[current].pause();
+  }
+
+  current--;
+
+  if (current < 0) {
+    current = media.length - 1;
+  }
+
+  media[current]
+    .classList.add("active");
+
+  if (media[current].tagName === "VIDEO") {
+    media[current].play();
+  }
+
+  document
+    .querySelector(".meta-count")
+    .textContent =
+      `${current + 1} / ${media.length}`;
+
+}
 

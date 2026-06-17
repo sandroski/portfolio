@@ -19,7 +19,7 @@ images:
 Dimensions: variable<br>
 Unfired clay, paper clay, digital print, sarape, acrylic paint<br>
 
-Part of <i>The Next Wavet</i>, group show at the UCR Arts, Riverside, 2021.
+Part of <i>The Next Wave</i>, group show at the UCR Arts, Riverside, 2021.
 
 
 

@@ -170,6 +170,7 @@ HOME CANVAS / DRAG PROJECTS
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  
 }
 
 #world {
@@ -320,7 +321,8 @@ HOME CANVAS / DRAG PROJECTS
 .world-focused .project-node.active {
   filter: blur(0);
   opacity: 1;
-  width: 60vw;
+  width: 90vw;
+  height: 40vh;
 }
 
 .world-focused .project-node.active .project-gallery {
@@ -369,12 +371,13 @@ PROJECT LIST PAGE - INDEX
     display: grid;
     width: 100%;
     align-items: center;
-    grid-template-columns: 4fr 3fr 2fr 1fr;
+    grid-template-columns: 4fr 3fr 0fr 0fr;
 }
 
 
 .project-list {
   padding-top: 10vh;
+  padding-bottom: 8vh;
 
 }
 
@@ -553,7 +556,7 @@ PROJECT LIST VIEW
   letter-spacing:.05em;
 
   border-bottom:1px solid #ddd;
-  grid-template-columns: 4fr 3fr 2fr 1fr;
+  grid-template-columns: 4fr 3fr 0fr 0fr;
   padding: 1em;
   
   
@@ -816,8 +819,8 @@ button.panel-close {
 
 .lightbox-close {
     position: absolute;
-    top: -2rem;
-    right: 0rem;
+    top: -1.5rem;
+    right: 12rem;
 }
 
 .lightbox-prev,
@@ -993,7 +996,11 @@ ABOUT CLOSE BUTTON
 }
 
 
+.world-focused .project-node.active {
 
+  width: 60vw;
+  height: auto;
+}
 
 .project-node {
   width: 25vw;
@@ -1015,6 +1022,10 @@ ABOUT CLOSE BUTTON
   transform: translateX(1em);
 }
 
+.project-row, .list-header {
+  grid-template-columns: 4fr 3fr 2fr 1fr;
+}
+
 .project-list .project-expand {
 
    display: grid;
@@ -1031,6 +1042,7 @@ ABOUT CLOSE BUTTON
 
 .project-images {
   height: 20vh;
+  padding-bottom: 1em;
 }
 
 .inner-lightbox {
