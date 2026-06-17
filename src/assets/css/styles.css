@@ -170,7 +170,7 @@ HOME CANVAS / DRAG PROJECTS
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  
+
 }
 
 #world {
@@ -310,6 +310,11 @@ HOME CANVAS / DRAG PROJECTS
 
 .meta-count {
   font-size: .8em;
+}
+
+body.project-open {
+  overflow: hidden;
+  touch-action: none;
 }
 
 
