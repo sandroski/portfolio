@@ -9,9 +9,7 @@ home:
   y: 600
 year: 2022
 type: Website
-category: 
-  - Web
-  - Custom
+category: Web
 description: 
 images:
   - /assets/images/mike-stoltz-mbp-1.mp4

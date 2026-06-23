@@ -18,8 +18,7 @@ permalink: /work/
 {% for project in collections.projects %}
 
 <div
-  class="project" data-slug="{{ project.fileSlug }}"  data-category="{% for cat in project.data.category %}{{ cat | lower }} {% endfor %}"
-
+  class="project" data-slug="{{ project.fileSlug }}"  data-category="{{ project.data.category | lower }}"
 >
 
   <a
@@ -66,6 +65,5 @@ permalink: /work/
   <button data-filter="art">Art</button>
   <button data-filter="web">Web</button>
   <button data-filter="print">Print</button>
-  <button data-filter="custom" style="display: none;">Custom</button>
 
 </div>
