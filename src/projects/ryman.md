@@ -14,7 +14,8 @@ mobile:
 year: 2022
 type: Book Design
 label: Book
-category: Print
+categories:
+  - print
 description: Book cover and interior design, published by Ricochet Press 2022
 images:
 

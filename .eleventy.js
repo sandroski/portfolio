@@ -8,6 +8,8 @@ module.exports = function(eleventyConfig) {
     .sort((a, b) => (a.data.featuredOrder || 999) - (b.data.featuredOrder || 999));
 });
 
+
+
 return {
   dir: {
     input: "src",

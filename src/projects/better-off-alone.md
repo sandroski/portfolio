@@ -6,7 +6,8 @@ tags: projects
 featured: false
 year: 2021
 type: Video
-category: Art
+categories:
+  - art
 fulltitle: 
 description: Video, 4:39. Featuring Coral Lobera. 
 detail-type: embed

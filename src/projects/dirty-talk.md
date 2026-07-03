@@ -13,7 +13,8 @@ mobile:
   x: 300
   y: 650
 type: Sculpture
-category: Art
+categories:
+  - art
 fulltitle: 
 label: Sculpture
 description: Sculptures & performance 2021

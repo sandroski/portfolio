@@ -449,6 +449,7 @@ PROJECT LIST PAGE - INDEX
   border-top: 1px solid #2a2a2a;
   background: #ffffff;
   height: 7vh;
+  z-index: 10;
 
 
 
@@ -587,9 +588,6 @@ body.list-view .project:hover, body.list-view .project:active {
 
 
 
-
-
-
 /* show metadata row */
 
 
@@ -606,6 +604,84 @@ body.list-view .project:hover, body.list-view .project:active {
 .project-cat, .project-year {
   display: none;
 }
+
+/* ------------------
+PRESENTATION MODE 
+--------------------*/
+
+
+
+#presentation-mode:empty {
+    display:none;
+}
+
+#presentation-mode {
+    width: 100%;
+    position: fixed;
+    background: #fff;
+    height: 85vh;
+    z-index: 10;
+    top: 8vh;
+}
+
+
+.presentation-project {
+  width: 100%;
+  height: 100%;
+}
+
+.presentation-project {
+
+  position: absolute;
+  inset: 0;
+
+  opacity: 0;
+  pointer-events: none;
+
+}
+
+.presentation-project.is-active {
+
+  opacity: 1;
+  pointer-events: auto;
+
+}
+
+.presentation-project .project-page {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.presentation-project .project-page .project-description {
+
+  width: 100%;
+  text-align: center;
+}
+
+.presentation-project .project-page .project-images {
+
+  height: 43vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 1em;
+  padding: 0;
+
+}
+
+
+
+
+#archive .project .desc-title {
+  display: none;
+}
+
+
+
+
 
 /* -------------------------
 VIEW TOGGLE
@@ -1023,8 +1099,14 @@ ABOUT CLOSE BUTTON
 }
 
 
+
+
  .project-cat, .project-year, .list-type, .list-year {
   display: block;
+}
+
+.project-cat {
+  text-transform: capitalize;
 }
 
  .project:hover .project-row,
@@ -1058,7 +1140,7 @@ ABOUT CLOSE BUTTON
 .inner-lightbox {
   position: fixed;
     left: 33vw;
-    top: 18vh;
+    top: 14vh;
     width: 60vw;
 }
 
@@ -1073,6 +1155,48 @@ ABOUT CLOSE BUTTON
   display: block;
   object-fit: contain;
 }
+
+
+.presentation-project .project-page  {
+
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+
+}
+
+.presentation-project .project-page:hover {
+  cursor: e-resize;
+}
+
+.presentation-project .project-page .project-description {
+  position: fixed;
+  bottom: 100px;
+}
+
+
+.presentation-project .project-page .project-images {
+
+  flex-wrap: wrap;
+  height: 70vh;
+  gap: 50px;
+  margin: 1em;
+  padding: 3em;
+
+}
+
+.presentation-project .project-page .project-images img {
+
+    min-width: 0;
+    min-height: 0;
+
+}
+
+.presentation-project .project-page .project-images img:hover {
+  cursor: e-resize;
+}
+
+
 
 
 .contact {

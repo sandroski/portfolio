@@ -6,7 +6,8 @@ tags: projects
 featured: false
 year: 2022
 type: Book Design
-category: Print
+categories:
+  - print
 fulltitle: 
 description: Book cover and interior design for titles Apology Engine, Math for the Self-Crippling, and Morgan (A Lyric), published by Goldline Press. 2022
 images:

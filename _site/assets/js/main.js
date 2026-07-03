@@ -140,13 +140,13 @@ const lightboxCounter =
   document.addEventListener("click", (e) => {
 
 const media = e.target.closest(
-  ".project-images img, .project-images video"
+  "#archive .project-images img, #archive .project-images video"
 );
 
 if (!media) return;
 
 const gallery =
-  media.closest(".project-images");
+  media.closest("#archive .project-images");
 
 if (!gallery) return;
 
@@ -264,6 +264,117 @@ document.querySelector(".lightbox-close")
 });
 
 
+
+
+  // -------------------
+  // PRESENTATION MODE 
+  //--------------------
+
+
+  let currentPresentation = 0;
+
+
+async function renderPresentation() {
+
+  const container =
+    document.querySelector("#presentation-mode");
+
+  container.innerHTML = "";
+
+  currentPresentation = 0;
+
+  const projects =
+  [...document.querySelectorAll(".project")]
+
+    .filter(project => project.dataset.presentation)
+
+    .sort((a, b) =>
+
+      Number(a.dataset.presentation) -
+      Number(b.dataset.presentation)
+
+    );
+
+      for (const project of projects) {
+
+  const link =
+    project.querySelector(".project-link");
+
+  const res =
+    await fetch(link.href);
+
+  const html =
+    await res.text();
+
+  const doc =
+    new DOMParser()
+      .parseFromString(html, "text/html");
+
+  const page =
+    doc.querySelector(".project-page");
+
+  const section =
+    document.createElement("section");
+
+  section.className =
+    "presentation-project";
+
+  section.appendChild(page);
+
+  container.appendChild(section);
+
+}
+
+const slides =
+  container.querySelectorAll(".presentation-project");
+
+if (slides.length) {
+
+  slides[0].classList.add("is-active");
+
+}
+
+container.onclick = () => {
+
+  const slides =
+    container.querySelectorAll(".presentation-project");
+
+  slides[currentPresentation]
+    .classList.remove("is-active");
+
+  currentPresentation++;
+
+if (currentPresentation >= slides.length) {
+
+  clearPresentation();
+
+  window.location.hash = "all";
+
+  return;
+
+}
+
+slides[currentPresentation]
+  .classList.add("is-active");
+
+  slides[currentPresentation]
+    .classList.add("is-active");
+
+};
+
+}
+
+
+
+function clearPresentation() {
+
+  const container =
+    document.querySelector("#presentation-mode");
+
+  container.innerHTML = "";
+
+}
+
   // -------------------------
 // ABOUT PANEL
 // -------------------------
@@ -336,12 +447,15 @@ function applyCategoryFilter(category) {
 
   document.querySelectorAll(".project").forEach(project => {
 
-    const projectCategory = project.dataset.category;
+    const projectCategories =
+  project.dataset.categories
+    .split(",")
+    .map(c => c.trim().toLowerCase());
 
     const show =
-      !category ||
-      category === "all" ||
-      projectCategory === category;
+  !category ||
+  category === "all" ||
+  projectCategories.includes(category);
 
     if (show) {
 
@@ -382,12 +496,25 @@ function syncActiveFilterButton(category) {
 
 function runHashFilter() {
 
+  if (!document.querySelector(".work")) return;
+
   const category =
     window.location.hash
       .replace("#", "")
       .toLowerCase();
 
-  applyCategoryFilter(category);
+  if (category === "selected") {
+
+    renderPresentation();
+
+  } else {
+
+    clearPresentation();
+
+    applyCategoryFilter(category);
+
+  }
+
   syncActiveFilterButton(category);
 
 }
@@ -413,6 +540,9 @@ filterButtons.forEach(button => {
   });
 
 });
+
+
+
 
 /*----------------------------
 HOME / WORLD / CAMERA / NODES
@@ -599,6 +729,8 @@ closeButton.addEventListener("click", () => {
 
 
 const world = document.querySelector("#world");
+
+
 
 let cameraX = -200;
 let cameraY = -100;
@@ -859,4 +991,9 @@ function cycleProjectReverse(node) {
       `${current + 1} / ${media.length}`;
 
 }
+
+
+
+
+
 

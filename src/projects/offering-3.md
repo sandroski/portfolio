@@ -13,7 +13,8 @@ mobile:
   y: 345
 year: 2021
 type: Installation
-category: Art
+categories:
+  - art
 label: Installation
 fulltitle: 
 description: Part of a solo show at the Phyllis Gill Gallery at UCR, Riverside, 2021.

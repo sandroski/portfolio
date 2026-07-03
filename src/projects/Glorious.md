@@ -13,7 +13,8 @@ mobile:
   y: 200
 year: 2021
 type: Sculpture
-category: Art
+categories:
+  - art
 label: Sculpture
 description: Part of *Six Linear Feet*, group show at the One Archives at USC, Los Angeles, 2021.
 images:

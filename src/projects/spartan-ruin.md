@@ -6,7 +6,8 @@ tags: projects
 featured: false
 year: 2021
 type: Exhibition Reader
-category: Print
+categories:
+  - print
 description: Design, layout for Young Joon Kwak's exhibition materials. Published by Commonwealth & Council, 2021
 images:
   - /assets/images/spartan-cover_vertical-dark-scaled.jpg

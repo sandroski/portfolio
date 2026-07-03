@@ -14,7 +14,8 @@ mobile:
 year: 2023
 type: Book Design
 label: Book
-category: Print
+categories:
+  - print
 fulltitle: "Elastic Empire: Refashioning War Through Aid in Palestine"
 description: Book cover design, published by Stanford University Press, 2023
 images:
@@ -22,7 +23,7 @@ images:
   - /assets/images/elastic-empire-front-cover-1.jpg
 
 ---
-
+       <p class="desc-title">{{ title }}</p> 
       <p>{{ description }}</p>
 
  

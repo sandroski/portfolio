@@ -6,7 +6,8 @@ tags: projects
 featured: false
 year: 2021
 type: Sculpture
-category: Art
+categories:
+  - art
 fulltitle:
 description:
 images:

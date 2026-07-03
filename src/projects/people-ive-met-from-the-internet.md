@@ -14,7 +14,8 @@ mobile:
   y: 900
 type: Book Design
 label: Book
-category: Print
+categories:
+  - print
 fulltitle: 
 description: Book cover, digital illustration and interior design. Published by Ricochet Press 2019
 images:

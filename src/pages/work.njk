@@ -5,10 +5,12 @@ permalink: /work/
 
 ---
 
+<div id="presentation-mode">></div>
 
 
 
-<section class="project-list content">
+
+<section id="archive" class="project-list content">
 
 
 <div class="list-header">
@@ -17,10 +19,9 @@ permalink: /work/
 
 {% for project in collections.projects %}
 
-<div
-  class="project" data-slug="{{ project.fileSlug }}"  data-category="{{ project.data.category | lower }}"
->
-
+<div class="project" data-slug="{{ project.fileSlug }}" {% if project.data.presentation %}
+  data-presentation="{{ project.data.presentation.order }}"
+{% endif %} data-categories="{{ project.data.categories | join(',') }}">
   <a
     href="{{ project.url }}"
     class="project-link"
@@ -39,7 +40,7 @@ permalink: /work/
       <p>{{ project.data.type }}</p>
 
       <p class="project-cat">
-        {{ project.data.category }}
+        {{ project.data.categories }}
       </p>
 
       <p class="project-year">
@@ -65,5 +66,6 @@ permalink: /work/
   <button data-filter="art">Art</button>
   <button data-filter="web">Web</button>
   <button data-filter="print">Print</button>
+
 
 </div>
