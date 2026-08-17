@@ -33,35 +33,71 @@ title: Home
 
 
 
-  <div class="project-gallery">
+ <div class="project-gallery">
 
-{% for media in project.data.images %}
+  {% if project.data.thumbnail %}
 
-  {% if ".mp4" in media %}
+    {% if ".mp4" in project.data.thumbnail %}
 
-    <video
-      class="{% if loop.first %}active{% endif %}"
-      muted
-      loop
-      playsinline
-      preload="metadata"
-    >
-      <source src="{{ media | url }}" type="video/mp4">
-    </video>
+      <video
+        class="active world-thumbnail"
+        muted
+        loop
+        playsinline
+        preload="metadata"
+      >
+        <source
+          src="{{ project.data.thumbnail | url }}"
+          type="video/mp4"
+        >
+      </video>
 
-  {% else %}
+    {% else %}
 
-    <img
-      src="{{ media | url }}"
-      alt="{{ project.data.title }}"
-      class="{% if loop.first %}active{% endif %}"
-    >
+      <img
+        src="{{ project.data.thumbnail | url }}"
+        alt="{{ project.data.title }}"
+        class="active world-thumbnail"
+      >
+
+    {% endif %}
 
   {% endif %}
 
-{% endfor %}
 
-  </div>
+  {% for media in project.data.images %}
+
+    {# Don't duplicate the thumbnail if it's already in images #}
+
+    {% if not project.data.thumbnail or media != project.data.thumbnail %}
+
+      {% if ".mp4" in media %}
+
+        <video
+          class="{% if not project.data.thumbnail and loop.first %}active{% endif %}"
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        >
+          <source src="{{ media | url }}" type="video/mp4">
+        </video>
+
+      {% else %}
+
+        <img
+          src="{{ media | url }}"
+          alt="{{ project.data.title }}"
+          class="{% if not project.data.thumbnail and loop.first %}active{% endif %}"
+        >
+
+      {% endif %}
+
+    {% endif %}
+
+  {% endfor %}
+
+</div>
 
 </a>
               {% endif %}

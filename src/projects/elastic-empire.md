@@ -12,6 +12,7 @@ mobile:
   x: 100
   y: 500
 year: 2023
+projectNumber: 3
 type: Book Design
 label: Book
 categories:

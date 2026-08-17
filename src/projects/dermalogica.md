@@ -8,6 +8,8 @@ year: 2018
 type: Web & Email Design
 categories:
   - web
+presentation:
+  order: 6
 description: Issue 2
 images:
   - /assets/images/dermalogica_home-1.jpg

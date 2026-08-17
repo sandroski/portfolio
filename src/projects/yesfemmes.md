@@ -10,12 +10,12 @@ home:
   y: 1200
 mobile:
   x: 0
-  y: 800
+  y: 920
 type: Website
 categories:
   - web
 presentation:
-  order: 2
+  order: 5
 description: Issue 2
 images:
   - /assets/images/yes-femmes-issue-2_home-1536x1063.jpg

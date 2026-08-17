@@ -6,11 +6,11 @@ tags: projects
 featured: true
 featuredOrder: 3
 home:
-  x: 825
+  x: 1200
   y: 525
 mobile:
-  x: 210
-  y: 345
+  x: 100
+  y: 745
 year: 2021
 type: Installation
 categories:

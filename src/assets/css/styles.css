@@ -136,16 +136,19 @@ header .container {
 .nav li:hover, .nav button:hover {
   text-decoration: underline;
   text-decoration-color: #2a2a2a;
+  font-style: italic;
+
 }
 
  .nav button:hover {
   cursor: pointer;
 }
 
-body.work .nav-work,
+body.home .nav-home, body.work .nav-work,
 body.about .nav-about {
   text-decoration: underline;
   text-decoration-color: #2a2a2a;
+  font-style: italic;
 
 }
 
@@ -377,6 +380,7 @@ PROJECT LIST PAGE - INDEX
     width: 100%;
     align-items: center;
     grid-template-columns: 4fr 3fr 0fr 0fr;
+    padding: 0em 2em;
 }
 
 
@@ -396,15 +400,19 @@ PROJECT LIST PAGE - INDEX
 
 .project-list .project-description {
   font-size: .9em;
-  padding: 0;
+  padding: 1em 2em;
 
+}
+
+.project-list .project-description p {
+  margin-top: 0;
 }
 
 .project {
   display:block;
   color:inherit;
   text-decoration:none;
-  padding: 0 1em;
+  padding: 0;
 }
 
 .project {
@@ -414,6 +422,8 @@ PROJECT LIST PAGE - INDEX
 .project.is-hidden {
   opacity: 0;
 }
+
+
 
 
 
@@ -555,7 +565,6 @@ PROJECT LIST VIEW
 
   display:grid;
   padding:12px 0;
-  margin-bottom:10px;
 
   font-size:.9em;
   text-transform:uppercase;
@@ -563,7 +572,7 @@ PROJECT LIST VIEW
 
   border-bottom:1px solid #ddd;
   grid-template-columns: 4fr 3fr 0fr 0fr;
-  padding: 1em;
+  padding: 1em 2em;
   
   
 
@@ -605,9 +614,40 @@ body.list-view .project:hover, body.list-view .project:active {
   display: none;
 }
 
+
+/*--------------------
+PORTFOLIO MODE 
+---------------------*/
+
+.portfolio-mode .project-images {
+
+  /*padding: 2em;*/
+
+}
+
+
+
 /* ------------------
 PRESENTATION MODE 
 --------------------*/
+
+#selected-mode {
+  display: none;
+}
+
+body.selected-mode #selected-mode {
+  display: block;
+  padding-top: 10vh;
+  background: pink;
+  height: 100vh;
+}
+
+
+body.selected-mode .project-list {
+  display: none;
+}
+
+
 
 
 
@@ -677,6 +717,20 @@ PRESENTATION MODE
 
 #archive .project .desc-title {
   display: none;
+}
+
+
+.presentation-next {
+
+margin: 8rem auto;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    bottom: 5vh;
+    right: 20px;
+    opacity: 0;
+  transform: translateX(-20px);
+  pointer-events: none;
 }
 
 
@@ -874,9 +928,6 @@ button.panel-close {
 
 .inner-lightbox {
   position: fixed;
-    left: 1em;
-    top: 18vh;
-    width: 90vw;
 }
 
 
@@ -920,6 +971,10 @@ button.panel-close {
     border: 0;
     cursor: e-resize;
 
+}
+
+#lightbox button:hover {
+  cursor: e-resize;
 }
 
 .lightbox-prev {
@@ -1109,10 +1164,15 @@ ABOUT CLOSE BUTTON
   text-transform: capitalize;
 }
 
- .project:hover .project-row,
- .project.active .project-row, .project.active .project-row{
+ .project:hover .project-row {
   transform: translateX(1em);
 }
+
+.project.active .project-row {
+  transform: none;
+}
+
+
 
 .project-row, .list-header {
   grid-template-columns: 4fr 3fr 2fr 1fr;
@@ -1123,26 +1183,22 @@ ABOUT CLOSE BUTTON
    display: grid;
     gap: 1em;
     gap: 2em;
-    grid-template-columns: 33vw 1fr;
+    grid-template-columns: 37.5vw 1fr;
+    padding: 0 1em;
 
 }
 
 .project-list .project-description {
-  padding: 1em;
+  padding: 1em 2em;
 
 }
 
 .project-images {
-  height: 20vh;
-  padding-bottom: 1em;
+  height: 16vh;
+  padding: 1em 0;
 }
 
-.inner-lightbox {
-  position: fixed;
-    left: 33vw;
-    top: 14vh;
-    width: 60vw;
-}
+
 
 
 
@@ -1159,7 +1215,7 @@ ABOUT CLOSE BUTTON
 
 .presentation-project .project-page  {
 
-  overflow-x: scroll;
+  overflow-x: auto;
   overflow-y: hidden;
 
 
@@ -1181,11 +1237,11 @@ ABOUT CLOSE BUTTON
   height: 70vh;
   gap: 50px;
   margin: 1em;
-  padding: 3em;
+  padding: 4em;
 
 }
 
-.presentation-project .project-page .project-images img {
+.presentation-project .project-page .project-images img, .presentation-project .project-page .project-images video {
 
     min-width: 0;
     min-height: 0;

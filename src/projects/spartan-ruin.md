@@ -6,6 +6,8 @@ tags: projects
 featured: false
 year: 2021
 type: Exhibition Reader
+presentation:
+  order: 3
 categories:
   - print
 description: Design, layout for Young Joon Kwak's exhibition materials. Published by Commonwealth & Council, 2021

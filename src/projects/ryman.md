@@ -10,8 +10,10 @@ home:
   y: 800
 mobile:
   x: 400
-  y: 420
+  y: 455
 year: 2022
+presentation:
+  order: 2
 type: Book Design
 label: Book
 categories:
@@ -19,8 +21,8 @@ categories:
 description: Book cover and interior design, published by Ricochet Press 2022
 images:
 
+  - /assets/images/ryman_front-cover.jpg
   - /assets/images/ryman_interior-2.jpg
-  - /assets/images/ryman_cover-spread-2-1.jpg
   - /assets/images/ryman_interior-1.jpg
   - /assets/images/ryman_interior-3.jpg
 ---

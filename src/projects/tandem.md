@@ -5,11 +5,12 @@ thumbnail: /assets/images/tandem-brand-collatoral_hp.jpg
 tags: projects
 featured: false
 year: 2023
+projectNumber: 2
 type: Brand Collateral
 categories:
   - print
 presentation:
-  order: 3
+  order: 1
 description: Business cards, letterhead, presentation and communications materials design. 
 images:
   - /assets/images/tandem-brand-collatoral_hp.jpg

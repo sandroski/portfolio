@@ -14,6 +14,93 @@ window.addEventListener("load", () => {
 });
 
 
+// Selected Projet Rows
+
+
+async function expandSelectedProjects() {
+
+  const selected =
+    [...document.querySelectorAll(".project")]
+      .filter(project => project.dataset.presentation)
+      .sort((a, b) =>
+        Number(a.dataset.presentation) -
+        Number(b.dataset.presentation)
+      );
+
+  const container =
+    selected[0]?.parentElement;
+
+  if (!container) return;
+
+  selected.forEach(project => {
+    container.appendChild(project);
+  });
+
+  for (const project of selected) {
+
+    const expand =
+      project.querySelector(".project-expand");
+
+    const link =
+      project.querySelector(".project-link");
+
+    if (!expand || !link) continue;
+
+    project.classList.add("active");
+
+    const res =
+      await fetch(link.href);
+
+    const html =
+      await res.text();
+
+    const doc =
+      new DOMParser()
+        .parseFromString(html, "text/html");
+
+    const content =
+      doc.querySelector(".project-page");
+
+    if (!content) continue;
+
+    expand.innerHTML =
+      content.innerHTML;
+
+    gsap.set(expand, {
+      height: "auto"
+    });
+
+  }
+
+}
+
+
+function collapseSelectedProjects() {
+
+  const selected =
+    [...document.querySelectorAll(".project")]
+      .filter(project => project.dataset.presentation);
+
+  selected.forEach(project => {
+
+    project.classList.remove("active");
+
+    const expand =
+      project.querySelector(".project-expand");
+
+    if (!expand) return;
+
+    expand.innerHTML = "";
+
+    gsap.set(expand, {
+      height: 0
+    });
+
+  });
+
+}
+
+
 
 // =========================================================
 // PROJECT ROW EXPANSION
@@ -26,6 +113,9 @@ function initProjectRows(projectLinks) {
     link.addEventListener("click", async (e) => {
 
       e.preventDefault();
+      if (window.location.hash === "#samples") {
+  return;
+}
 
       const project =
         link.closest(".project");
@@ -434,6 +524,40 @@ aboutClose?.addEventListener("click", (e) => {
   closeAbout();
 });
 
+function applySelectedFilter() {
+
+  const projects =
+    [...document.querySelectorAll(".project")];
+
+  // Selected projects only
+  const selected =
+    projects
+      .filter(project => project.dataset.presentation)
+      .sort((a, b) =>
+        Number(a.dataset.presentation) -
+        Number(b.dataset.presentation)
+      );
+
+  // Hide everything first
+  projects.forEach(project => {
+
+    project.classList.add("is-hidden");
+    project.style.display = "none";
+
+  });
+
+  // Show selected projects
+  selected.forEach(project => {
+
+    project.style.display = "";
+    project.classList.remove("is-hidden");
+
+  });
+
+  
+
+}
+
 
 // -------------------------
 // CATEGORY FILTERS
@@ -503,17 +627,30 @@ function runHashFilter() {
       .replace("#", "")
       .toLowerCase();
 
-  if (category === "selected") {
+  if (category === "samples") {
 
-    renderPresentation();
+  document.body.classList.add("portfolio-mode");
+  document.body.classList.remove("selected-mode");
 
-  } else {
+  applySelectedFilter();
+  expandSelectedProjects();
 
-    clearPresentation();
+} else if (category === "portfolio") {
 
-    applyCategoryFilter(category);
+  document.body.classList.remove("portfolio-mode");
+  document.body.classList.add("selected-mode");
 
-  }
+  collapseSelectedProjects();
+
+} else {
+
+  document.body.classList.remove("portfolio-mode");
+  document.body.classList.remove("selected-mode");
+
+  collapseSelectedProjects();
+  applyCategoryFilter(category);
+
+}
 
   syncActiveFilterButton(category);
 
@@ -540,6 +677,9 @@ filterButtons.forEach(button => {
   });
 
 });
+
+
+
 
 
 
